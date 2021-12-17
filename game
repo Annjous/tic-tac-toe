@@ -1,0 +1,13 @@
+from tkinter import *
+import tkinter.messagebox
+
+def exit(event):
+    game.destroy()
+
+def help(event):
+    tkinter.messagebox.showinfo("Держу в курсе",
+                                "F1 - INFO \n" +
+                                "F12 - New game \n" +
+                                "Ecs - Exit game \n")
+                                
+game.mainloop()
