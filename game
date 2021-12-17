@@ -4,10 +4,19 @@ import tkinter.messagebox
 def exit(event):
     game.destroy()
 
-def help(event):
+def get_info(event):
     tkinter.messagebox.showinfo("Держу в курсе",
                                 "F1 - INFO \n" +
                                 "F12 - New game \n" +
                                 "Ecs - Exit game \n")
                                 
+def start(event):
+    global butn
+    global field
+    global numButton
+    for b in butn:
+        b.config(bg="white", text='')
+    field = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    numButton = []
+    
 game.mainloop()
