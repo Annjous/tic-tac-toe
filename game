@@ -1,1 +1,131 @@
+from tkinter import *
+import random
+from tkinter import messagebox
 
+root = Tk()
+root.title('Tic-tac-toe')
+game_run = True
+field = []
+number = 0
+
+
+#функция закрывает окно игры
+def exit():
+    root.destroy()
+
+
+#функция вызовы окна со справкой
+def help():
+    messagebox.showinfo("Держу в курсе",
+                        "F1 - info \n" +
+                        "Ecs - Exit game \n")
+
+
+#функция задает параметры новой игры
+def start():
+    for row in range(3):
+        for col in range(3):
+            field[row][col]['text'] = ' '
+            field[row][col]['background'] = 'lavender'
+    global game_run
+    game_run = True
+    global number
+    number = 0
+
+
+#функция при нажатии на поле заполняет его, если игра еще не завершена
+#затем наступает ход компьютера, если до этого не был выявлен победитель
+def click(row, col):
+    if game_run and field[row][col]['text'] == ' ':
+        field[row][col]['text'] = 'X'
+        global number
+        number += 1
+        winner('X')
+        if game_run and number < 5:
+            intelligence()
+            winner('O')
+
+
+#функция проверяет если три поля, стоящих в одну линию,
+#заполнены одним и тем же игроком
+#цикл повторятся для значений n от 1 до 3 и затем переходит к следующему шагу
+def winner(smb):
+    for n in range(3):
+        check(field[n][0], field[n][1], field[n][2], smb)
+        check(field[0][n], field[1][n], field[2][n], smb)
+    check(field[0][0], field[1][1], field[2][2], smb)
+    check(field[2][0], field[1][1], field[0][2], smb)
+
+
+#функция закрашивает в розовый цвет линию ходов выигравшего игрока
+#в случае выявления победителя игра прекращается
+def check(a1, a2, a3, smb):
+    if a1['text'] == smb and a2['text'] == smb and a3['text'] == smb:
+        a1['background'] = a2['background'] = a3['background'] = 'pink'
+        global game_run
+        game_run = False
+
+
+#компьютер сделает ход на поле, которое помешает противнику выйграть
+def atack(a1, a2, a3, smb):
+    res = False
+    if a1['text'] == smb and a2['text'] == smb and a3['text'] == ' ':
+        a3['text'] = 'O'
+        res = True
+    if a1['text'] == smb and a2['text'] == ' ' and a3['text'] == smb:
+        a2['text'] = 'O'
+        res = True
+    if a1['text'] == ' ' and a2['text'] == smb and a3['text'] == smb:
+        a1['text'] = 'O'
+        res = True
+    return res
+
+
+#ходы компьютера
+def intelligence():
+    for n in range(3):
+        if atack(field[n][0], field[n][1], field[n][2], 'O'):
+            return
+        if atack(field[0][n], field[1][n], field[2][n], 'O'):
+            return
+    if atack(field[0][0], field[1][1], field[2][2], 'O'):
+        return
+    if atack(field[2][0], field[1][1], field[0][2], 'O'):
+        return
+    for n in range(3):
+        if atack(field[n][0], field[n][1], field[n][2], 'X'):
+            return
+        if atack(field[0][n], field[1][n], field[2][n], 'X'):
+            return
+    if atack(field[0][0], field[1][1], field[2][2], 'X'):
+        return
+    if atack(field[2][0], field[1][1], field[0][2], 'X'):
+        return
+    while True:
+        row = random.randint(0, 2)
+        col = random.randint(0, 2)
+        if field[row][col]['text'] == ' ':
+            field[row][col]['text'] = 'O'
+            break
+
+
+#интерфэйс заключается в созд
+for row in range(3):
+    line = []
+    for col in range(3):
+        button = Button(root, text=' ', width=4, height=2,
+                        font=('Verdana', 20, 'bold'),
+                        background='lavender',
+                        command=lambda row=row, col=col: click(row, col))
+        button.grid(row=row, column=col, sticky='nsew')
+        line.append(button)
+    field.append(line)
+
+
+#функционал кнопок и создание дополнительной кнопки "новая игра"
+new_game_start = Button(root, text='new game', command=start)
+new_game_start.grid(row=3, column=0, columnspan=3, sticky='nsew')
+root.bind('<Escape>', exit)
+root.bind('<F1>', help)
+
+root.mainloop()
