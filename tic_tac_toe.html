@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module tic_tac_toe</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>tic_tac_toe</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Chuawei%5Cpycharmprojects%5Cpythonproject%5Ctic_tac_toe.py">c:\users\huawei\pycharmprojects\pythonproject\tic_tac_toe.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="tkinter.constants.html">tkinter.constants</a><br>
+<a href="enum.html">enum</a><br>
+</td><td width="25%" valign=top><a href="tkinter.messagebox.html">tkinter.messagebox</a><br>
+<a href="random.html">random</a><br>
+</td><td width="25%" valign=top><a href="re.html">re</a><br>
+<a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-atack"><strong>atack</strong></a>(a1, a2, a3, smb)</dt><dd><tt>компьютер&nbsp;сделает&nbsp;ход&nbsp;на&nbsp;поле,&nbsp;которое&nbsp;помешает&nbsp;противнику&nbsp;выйграть&nbsp;если&nbsp;во&nbsp;время&nbsp;этой&nbsp;проверки&nbsp;будет&nbsp;выявлено&nbsp;1&nbsp;пол<br>
+е,&nbsp;которое&nbsp;образует&nbsp;линию&nbsp;с&nbsp;предыдущими&nbsp;ходами&nbsp;одного&nbsp;игрока,&nbsp;ход&nbsp;компьютера&nbsp;выпадет&nbsp;на&nbsp;это&nbsp;поле<br>
+:param&nbsp;a1&nbsp;-&nbsp;первое&nbsp;поле<br>
+:param&nbsp;a2&nbsp;-&nbsp;второе&nbsp;поле<br>
+:param&nbsp;a3&nbsp;-&nbsp;третье&nbsp;поле<br>
+:param&nbsp;smb&nbsp;-&nbsp;ход&nbsp;игрока&nbsp;или&nbsp;компьютера&nbsp;(О&nbsp;или&nbsp;Х)</tt></dd></dl>
+ <dl><dt><a name="-check"><strong>check</strong></a>(a1, a2, a3, smb)</dt><dd><tt>функция&nbsp;закрашивает&nbsp;в&nbsp;розовый&nbsp;цвет&nbsp;линию&nbsp;ходов&nbsp;выигравшего&nbsp;игрока&nbsp;в&nbsp;случае&nbsp;выявления&nbsp;победителя&nbsp;игра&nbsp;прекращается<br>
+:param&nbsp;a1&nbsp;-&nbsp;первое&nbsp;поле<br>
+:param&nbsp;a2&nbsp;-&nbsp;второе&nbsp;поле<br>
+:param&nbsp;a3&nbsp;-&nbsp;третье&nbsp;поле<br>
+:param&nbsp;smb&nbsp;-&nbsp;ход&nbsp;игрока&nbsp;или&nbsp;компьютера&nbsp;(О&nbsp;или&nbsp;Х)</tt></dd></dl>
+ <dl><dt><a name="-click"><strong>click</strong></a>(row, col)</dt><dd><tt>при&nbsp;нажатии&nbsp;на&nbsp;поле&nbsp;функция&nbsp;заполняет&nbsp;его,&nbsp;если&nbsp;игра&nbsp;еще&nbsp;не&nbsp;завершена&nbsp;затем&nbsp;наступает&nbsp;ход&nbsp;компьютера,&nbsp;если&nbsp;до&nbsp;этого<br>
+не&nbsp;был&nbsp;выявлен&nbsp;победитель<br>
+:param&nbsp;row&nbsp;-&nbsp;ряд&nbsp;поля<br>
+:param&nbsp;col&nbsp;-&nbsp;стобец&nbsp;поля</tt></dd></dl>
+ <dl><dt><a name="-intelligence"><strong>intelligence</strong></a>()</dt><dd><tt>ходы&nbsp;компьютера,&nbsp;где&nbsp;он&nbsp;сначала&nbsp;производит&nbsp;проверку&nbsp;для&nbsp;рядов,&nbsp;затем&nbsp;столбцов&nbsp;и&nbsp;диагоналей&nbsp;если&nbsp;у&nbsp;компьютера&nbsp;есть&nbsp;во<br>
+зможность&nbsp;заполнить&nbsp;поле,&nbsp;которое&nbsp;составит&nbsp;линию,&nbsp;он&nbsp;походит&nbsp;на&nbsp;него&nbsp;затем&nbsp;он&nbsp;производит&nbsp;проверку&nbsp;для&nbsp;ходов&nbsp;противни<br>
+ка,&nbsp;не&nbsp;может&nbsp;ли&nbsp;он&nbsp;выйграть.&nbsp;если&nbsp;нет&nbsp;то&nbsp;делает&nbsp;ход&nbsp;на&nbsp;любое&nbsp;свободное&nbsp;поле</tt></dd></dl>
+ <dl><dt><a name="-start"><strong>start</strong></a>()</dt><dd><tt>задаются&nbsp;параметры&nbsp;поля&nbsp;и&nbsp;его&nbsp;характеристики</tt></dd></dl>
+ <dl><dt><a name="-winner"><strong>winner</strong></a>(smb)</dt><dd><tt>производится&nbsp;проверка&nbsp;выявления&nbsp;победителяесли&nbsp;имеется&nbsp;игрок,&nbsp;который&nbsp;заполнил&nbsp;три&nbsp;поля&nbsp;в&nbsp;одной&nbsp;из&nbsp;строчек&nbsp;или&nbsp;столб<br>
+иков&nbsp;или&nbsp;по&nbsp;диагонали<br>
+:param&nbsp;smb&nbsp;-&nbsp;чей-либо&nbsp;ход,&nbsp;компьютера&nbsp;или&nbsp;игрока</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>ACTIVE</strong> = 'active'<br>
+<strong>ALL</strong> = 'all'<br>
+<strong>ANCHOR</strong> = 'anchor'<br>
+<strong>ARC</strong> = 'arc'<br>
+<strong>BASELINE</strong> = 'baseline'<br>
+<strong>BEVEL</strong> = 'bevel'<br>
+<strong>BOTH</strong> = 'both'<br>
+<strong>BOTTOM</strong> = 'bottom'<br>
+<strong>BROWSE</strong> = 'browse'<br>
+<strong>BUTT</strong> = 'butt'<br>
+<strong>CASCADE</strong> = 'cascade'<br>
+<strong>CENTER</strong> = 'center'<br>
+<strong>CHAR</strong> = 'char'<br>
+<strong>CHECKBUTTON</strong> = 'checkbutton'<br>
+<strong>CHORD</strong> = 'chord'<br>
+<strong>COMMAND</strong> = 'command'<br>
+<strong>CURRENT</strong> = 'current'<br>
+<strong>DISABLED</strong> = 'disabled'<br>
+<strong>DOTBOX</strong> = 'dotbox'<br>
+<strong>E</strong> = 'e'<br>
+<strong>END</strong> = 'end'<br>
+<strong>EW</strong> = 'ew'<br>
+<strong>EXCEPTION</strong> = 8<br>
+<strong>EXTENDED</strong> = 'extended'<br>
+<strong>FALSE</strong> = 0<br>
+<strong>FIRST</strong> = 'first'<br>
+<strong>FLAT</strong> = 'flat'<br>
+<strong>GROOVE</strong> = 'groove'<br>
+<strong>HIDDEN</strong> = 'hidden'<br>
+<strong>HORIZONTAL</strong> = 'horizontal'<br>
+<strong>INSERT</strong> = 'insert'<br>
+<strong>INSIDE</strong> = 'inside'<br>
+<strong>LAST</strong> = 'last'<br>
+<strong>LEFT</strong> = 'left'<br>
+<strong>MITER</strong> = 'miter'<br>
+<strong>MOVETO</strong> = 'moveto'<br>
+<strong>MULTIPLE</strong> = 'multiple'<br>
+<strong>N</strong> = 'n'<br>
+<strong>NE</strong> = 'ne'<br>
+<strong>NO</strong> = 0<br>
+<strong>NONE</strong> = 'none'<br>
+<strong>NORMAL</strong> = 'normal'<br>
+<strong>NS</strong> = 'ns'<br>
+<strong>NSEW</strong> = 'nsew'<br>
+<strong>NUMERIC</strong> = 'numeric'<br>
+<strong>NW</strong> = 'nw'<br>
+<strong>OFF</strong> = 0<br>
+<strong>ON</strong> = 1<br>
+<strong>OUTSIDE</strong> = 'outside'<br>
+<strong>PAGES</strong> = 'pages'<br>
+<strong>PIESLICE</strong> = 'pieslice'<br>
+<strong>PROJECTING</strong> = 'projecting'<br>
+<strong>RADIOBUTTON</strong> = 'radiobutton'<br>
+<strong>RAISED</strong> = 'raised'<br>
+<strong>READABLE</strong> = 2<br>
+<strong>RIDGE</strong> = 'ridge'<br>
+<strong>RIGHT</strong> = 'right'<br>
+<strong>ROUND</strong> = 'round'<br>
+<strong>S</strong> = 's'<br>
+<strong>SCROLL</strong> = 'scroll'<br>
+<strong>SE</strong> = 'se'<br>
+<strong>SEL</strong> = 'sel'<br>
+<strong>SEL_FIRST</strong> = 'sel.first'<br>
+<strong>SEL_LAST</strong> = 'sel.last'<br>
+<strong>SEPARATOR</strong> = 'separator'<br>
+<strong>SINGLE</strong> = 'single'<br>
+<strong>SOLID</strong> = 'solid'<br>
+<strong>SUNKEN</strong> = 'sunken'<br>
+<strong>SW</strong> = 'sw'<br>
+<strong>TOP</strong> = 'top'<br>
+<strong>TRUE</strong> = 1<br>
+<strong>TclVersion</strong> = 8.6<br>
+<strong>TkVersion</strong> = 8.6<br>
+<strong>UNDERLINE</strong> = 'underline'<br>
+<strong>UNITS</strong> = 'units'<br>
+<strong>VERTICAL</strong> = 'vertical'<br>
+<strong>W</strong> = 'w'<br>
+<strong>WORD</strong> = 'word'<br>
+<strong>WRITABLE</strong> = 4<br>
+<strong>X</strong> = 'x'<br>
+<strong>Y</strong> = 'y'<br>
+<strong>YES</strong> = 1<br>
+<strong>button</strong> = &lt;tkinter.Button object .!button9&gt;<br>
+<strong>col</strong> = 2<br>
+<strong>field</strong> = [[&lt;tkinter.Button object .!button&gt;, &lt;tkinter.Button object .!button2&gt;, &lt;tkinter.Button object .!button3&gt;], [&lt;tkinter.Button object .!button4&gt;, &lt;tkinter.Button object .!button5&gt;, &lt;tkinter.Button object .!button6&gt;], [&lt;tkinter.Button object .!button7&gt;, &lt;tkinter.Button object .!button8&gt;, &lt;tkinter.Button object .!button9&gt;]]<br>
+<strong>game_run</strong> = True<br>
+<strong>line</strong> = [&lt;tkinter.Button object .!button7&gt;, &lt;tkinter.Button object .!button8&gt;, &lt;tkinter.Button object .!button9&gt;]<br>
+<strong>new_game_start</strong> = &lt;tkinter.Button object .!button10&gt;<br>
+<strong>number</strong> = 0<br>
+<strong>root</strong> = &lt;tkinter.Tk object .&gt;<br>
+<strong>row</strong> = 2<br>
+<strong>wantobjects</strong> = 1</td></tr></table>
+</body></html>
