@@ -1,2 +1,1 @@
-tkinter
-tkinter.messagebox
+tkinter==8.6.9
