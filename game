@@ -2,6 +2,7 @@ from tkinter import *
 import random
 from tkinter import messagebox
 
+
 root = Tk()
 root.title('Tic-tac-toe')
 game_run = True
@@ -9,20 +10,26 @@ field = []
 number = 0
 
 
-# закрытие окна программы
 def _exit(event):
+    """
+    закрывает программу при вызове функции
+    """
     root.destroy()
 
 
-# вызов окна, где находится справка о функционале доп.кнопок
 def _help(event):
+    """
+    вызов окна, где находится справка о функционале доп.кнопок
+    """
     messagebox.showinfo("Держу в курсе",
                         "F1 - info \n" +
                         "Ecs - Exit game \n")
 
 
-# задаются параметры поля и его характеристики
 def start():
+    """
+    задаются параметры поля и его характеристики
+    """
     for row in range(3):
         for col in range(3):
             field[row][col]['text'] = ' '
@@ -33,9 +40,13 @@ def start():
     number = 0
 
 
-# при нажатии на поле функция заполняет его, если игра еще не завершена
-# затем наступает ход компьютера, если до этого не был выявлен победитель
 def click(row, col):
+    """
+    при нажатии на поле функция заполняет его, если игра еще не завершена затем наступает ход компьютера, если до этого
+    не был выявлен победитель
+    :param row - ряд поля
+    :param col - стобец поля
+    """
     if game_run and field[row][col]['text'] == ' ':
         field[row][col]['text'] = 'X'
         global number
@@ -46,10 +57,12 @@ def click(row, col):
             winner('O')
 
 
-# проводится проверка выявления победителя
-# если имеется игрок, который заполнил три поля
-# в одной из строчек или столбиков или по диагонали
 def winner(smb):
+    """
+    производится проверка выявления победителяесли имеется игрок, который заполнил три поля в одной из строчек или столб
+    иков или по диагонали
+    :param smb - чей-либо ход, компьютера или игрока
+    """
     for n in range(3):
         check(field[n][0], field[n][1], field[n][2], smb)
         check(field[0][n], field[1][n], field[2][n], smb)
@@ -57,19 +70,29 @@ def winner(smb):
     check(field[2][0], field[1][1], field[0][2], smb)
 
 
-# функция закрашивает в розовый цвет линию ходов выигравшего игрока
-# в случае выявления победителя игра прекращается
 def check(a1, a2, a3, smb):
+    """
+    функция закрашивает в розовый цвет линию ходов выигравшего игрока в случае выявления победителя игра прекращается
+    :param a1 - первое поле
+    :param a2 - второе поле
+    :param a3 - третье поле
+    :param smb - ход игрока или компьютера (О или Х)
+    """
     if a1['text'] == smb and a2['text'] == smb and a3['text'] == smb:
         a1['background'] = a2['background'] = a3['background'] = 'pink'
         global game_run
         game_run = False
 
 
-# компьютер сделает ход на поле, которое помешает противнику выйграть
-# если во время этой проверки будет выявлено 1 поле, которое образует
-# линию с предыдущими ходами одного игрока, ход компьютера выпадет на это поле
 def atack(a1, a2, a3, smb):
+    """
+    компьютер сделает ход на поле, которое помешает противнику выйграть если во время этой проверки будет выявлено 1 пол
+    е, которое образует линию с предыдущими ходами одного игрока, ход компьютера выпадет на это поле
+    :param a1 - первое поле
+    :param a2 - второе поле
+    :param a3 - третье поле
+    :param smb - ход игрока или компьютера (О или Х)
+    """
     res = False
     if a1['text'] == smb and a2['text'] == smb and a3['text'] == ' ':
         a3['text'] = 'O'
@@ -83,19 +106,23 @@ def atack(a1, a2, a3, smb):
     return res
 
 
-#ходы компьютера
 def intelligence():
+    """
+    ходы компьютера, где он сначала производит проверку для рядов, затем столбцов и диагоналей если у компьютера есть во
+    зможность заполнить поле, которое составит линию, он походит на него затем он производит проверку для ходов противни
+    ка, не может ли он выйграть. если нет то делает ход на любое свободное поле
+    """
     for n in range(3):
-        if atack(field[n][0], field[n][1], field[n][2], 'O'):       # производит проверку для рядов
+        if atack(field[n][0], field[n][1], field[n][2], 'O'):
             return
-        if atack(field[0][n], field[1][n], field[2][n], 'O'):       # и колонн
+        if atack(field[0][n], field[1][n], field[2][n], 'O'):
             return
-    if atack(field[0][0], field[1][1], field[2][2], 'O'):           # и двух диагоналей
+    if atack(field[0][0], field[1][1], field[2][2], 'O'):
         return
-    if atack(field[2][0], field[1][1], field[0][2], 'O'):           # если у компьютера есть возможность заполнить поле,
-        return                                                      # которое составит линию, он походит на него
+    if atack(field[2][0], field[1][1], field[0][2], 'O'):
+        return
     for n in range(3):
-        if atack(field[n][0], field[n][1], field[n][2], 'X'):       # проверяет не может ли человек выйграть
+        if atack(field[n][0], field[n][1], field[n][2], 'X'):
             return
         if atack(field[0][n], field[1][n], field[2][n], 'X'):
             return
@@ -106,13 +133,15 @@ def intelligence():
     while True:
         row = random.randint(0, 2)
         col = random.randint(0, 2)
-        if field[row][col]['text'] == ' ':                          # в любое свободное поле ставит "0"
+        if field[row][col]['text'] == ' ':
             field[row][col]['text'] = 'О'
             break
 
 
-# создается интерфейс из 3 рядов и 3 колонн, которые образуют 9 полей для игры
 for row in range(3):
+    """
+    создается интерфейс из 3 рядов и 3 колонн, которые образуют 9 полей для игры
+    """
     line = []
     for col in range(3):
         button = Button(root, text=' ', width=4, height=2,
@@ -124,7 +153,6 @@ for row in range(3):
     field.append(line)
 
 
-# функционал кнопок и создание дополнительной кнопки "новая игра"
 new_game_start = Button(root, text='new game', command=start)
 new_game_start.grid(row=3, column=0, columnspan=3, sticky='nsew')
 root.bind('<Escape>', _exit)
