@@ -9,19 +9,19 @@ field = []
 number = 0
 
 
-#функция закрывает окно игры
-def exit():
+# закрытие окна программы
+def _exit(event):
     root.destroy()
 
 
-#функция вызовы окна со справкой
-def help():
+# вызов окна, где находится справка о функционале доп.кнопок
+def _help(event):
     messagebox.showinfo("Держу в курсе",
                         "F1 - info \n" +
                         "Ecs - Exit game \n")
 
 
-#функция задает параметры новой игры
+# задаются параметры поля и его характеристики
 def start():
     for row in range(3):
         for col in range(3):
@@ -33,8 +33,8 @@ def start():
     number = 0
 
 
-#функция при нажатии на поле заполняет его, если игра еще не завершена
-#затем наступает ход компьютера, если до этого не был выявлен победитель
+# при нажатии на поле функция заполняет его, если игра еще не завершена
+# затем наступает ход компьютера, если до этого не был выявлен победитель
 def click(row, col):
     if game_run and field[row][col]['text'] == ' ':
         field[row][col]['text'] = 'X'
@@ -46,9 +46,9 @@ def click(row, col):
             winner('O')
 
 
-#функция проверяет если три поля, стоящих в одну линию,
-#заполнены одним и тем же игроком
-#цикл повторятся для значений n от 1 до 3 и затем переходит к следующему шагу
+# проводится проверка выявления победителя
+# если имеется игрок, который заполнил три поля
+# в одной из строчек или столбиков или по диагонали
 def winner(smb):
     for n in range(3):
         check(field[n][0], field[n][1], field[n][2], smb)
@@ -57,8 +57,8 @@ def winner(smb):
     check(field[2][0], field[1][1], field[0][2], smb)
 
 
-#функция закрашивает в розовый цвет линию ходов выигравшего игрока
-#в случае выявления победителя игра прекращается
+# функция закрашивает в розовый цвет линию ходов выигравшего игрока
+# в случае выявления победителя игра прекращается
 def check(a1, a2, a3, smb):
     if a1['text'] == smb and a2['text'] == smb and a3['text'] == smb:
         a1['background'] = a2['background'] = a3['background'] = 'pink'
@@ -66,7 +66,9 @@ def check(a1, a2, a3, smb):
         game_run = False
 
 
-#компьютер сделает ход на поле, которое помешает противнику выйграть
+# компьютер сделает ход на поле, которое помешает противнику выйграть
+# если во время этой проверки будет выявлено 1 поле, которое образует
+# линию с предыдущими ходами одного игрока, ход компьютера выпадет на это поле
 def atack(a1, a2, a3, smb):
     res = False
     if a1['text'] == smb and a2['text'] == smb and a3['text'] == ' ':
@@ -84,16 +86,16 @@ def atack(a1, a2, a3, smb):
 #ходы компьютера
 def intelligence():
     for n in range(3):
-        if atack(field[n][0], field[n][1], field[n][2], 'O'):
+        if atack(field[n][0], field[n][1], field[n][2], 'O'):       # производит проверку для рядов
             return
-        if atack(field[0][n], field[1][n], field[2][n], 'O'):
+        if atack(field[0][n], field[1][n], field[2][n], 'O'):       # и колонн
             return
-    if atack(field[0][0], field[1][1], field[2][2], 'O'):
+    if atack(field[0][0], field[1][1], field[2][2], 'O'):           # и двух диагоналей
         return
-    if atack(field[2][0], field[1][1], field[0][2], 'O'):
-        return
+    if atack(field[2][0], field[1][1], field[0][2], 'O'):           # если у компьютера есть возможность заполнить поле,
+        return                                                      # которое составит линию, он походит на него
     for n in range(3):
-        if atack(field[n][0], field[n][1], field[n][2], 'X'):
+        if atack(field[n][0], field[n][1], field[n][2], 'X'):       # проверяет не может ли человек выйграть
             return
         if atack(field[0][n], field[1][n], field[2][n], 'X'):
             return
@@ -104,12 +106,12 @@ def intelligence():
     while True:
         row = random.randint(0, 2)
         col = random.randint(0, 2)
-        if field[row][col]['text'] == ' ':
-            field[row][col]['text'] = 'O'
+        if field[row][col]['text'] == ' ':                          # в любое свободное поле ставит "0"
+            field[row][col]['text'] = 'О'
             break
 
 
-#интерфэйс заключается в созд
+# создается интерфейс из 3 рядов и 3 колонн, которые образуют 9 полей для игры
 for row in range(3):
     line = []
     for col in range(3):
@@ -122,10 +124,10 @@ for row in range(3):
     field.append(line)
 
 
-#функционал кнопок и создание дополнительной кнопки "новая игра"
+# функционал кнопок и создание дополнительной кнопки "новая игра"
 new_game_start = Button(root, text='new game', command=start)
 new_game_start.grid(row=3, column=0, columnspan=3, sticky='nsew')
-root.bind('<Escape>', exit)
-root.bind('<F1>', help)
+root.bind('<Escape>', _exit)
+root.bind('<F1>', _help)
 
 root.mainloop()
